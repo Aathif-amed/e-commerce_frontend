@@ -1,0 +1,7 @@
+.navLoginLink{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: gray;
+    border: none;
+}
