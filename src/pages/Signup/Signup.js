@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Button,
   Col,
   Container,
@@ -9,13 +10,22 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import signIn_Image from "../../assets/signIn.png";
+import { useRegisterMutation } from "../../utils/apiCalls";
 import "./signup.css";
 
 function Signup() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = () => {
-    alert("form");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [register, { error, isLoading, isError }] = useRegisterMutation();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      error.data = "password and confirm password must be same";
+      return isError;
+    }
+    register({ name, email, password });
   };
   return (
     <Container className="signup_container">
@@ -26,15 +36,16 @@ function Signup() {
         <Col md={6} className="signup_form-container">
           <Form className="signup_form" onSubmit={handleSubmit}>
             <h1 className="mt-3 mb-4 text-center">Sign Up</h1>
+            {isError && <Alert variant="danger">{error.data}</Alert>}
             <Form.Group>
               <Form.Label>Name</Form.Label>
               <Form.Control
                 className="mb-3"
                 type="text"
                 placeholder="Name"
-                value={email}
+                value={name}
                 onChange={(e) => {
-                  setEmail(e.target.value);
+                  setName(e.target.value);
                 }}
                 required
               />
@@ -58,9 +69,9 @@ function Signup() {
                 className="mb-3"
                 type="password"
                 placeholder="Password"
-                value={email}
+                value={password}
                 onChange={(e) => {
-                  setEmail(e.target.value);
+                  setPassword(e.target.value);
                 }}
                 required
               />
@@ -71,19 +82,29 @@ function Signup() {
                 className="mb-3"
                 type="password"
                 placeholder="Password"
-                value={password}
+                value={confirmPassword}
                 onChange={(e) => {
-                  setPassword(e.target.value);
+                  setConfirmPassword(e.target.value);
                 }}
                 required
               />
-           
             </Form.Group>
             <Form.Group className="text-center mb-3">
-              <Button type="submit"  variant="secondary" >Submit</Button>
+              {isLoading ? (
+                <div className="spinner-border text-secondary" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                <Button type="submit" variant="secondary" disabled={isLoading}>
+                  Submit
+                </Button>
+              )}
             </Form.Group>
             <p className="text-center">
-              Already have an account? <Link to="/login" className="signInlink">Sign In</Link>
+              Already have an account?{" "}
+              <Link to="/login" className="signInlink">
+                Sign In
+              </Link>
             </p>
           </Form>
         </Col>

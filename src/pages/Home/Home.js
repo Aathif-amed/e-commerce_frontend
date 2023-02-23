@@ -5,14 +5,11 @@ import "./home.css";
 import { Col, Row } from "react-bootstrap";
 import categories from "../../components/Categories";
 import { LinkContainer } from "react-router-bootstrap";
+import Banner from "../../components/Banner/Banner";
 function Home() {
   return (
     <div>
-      <img
-        src="https://res.cloudinary.com/dgrkhvtdv/image/upload/v1675183350/ecom_imgs/homeBanner_vhbbex.jpg"
-        alt="banner"
-        className="home_banner"
-      />
+      <Banner />
       <div className="featured_product_container container mt-4">
         <h2>Last Products</h2>
         <div className="div">
