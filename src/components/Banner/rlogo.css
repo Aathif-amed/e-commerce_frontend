@@ -1,0 +1,28 @@
+
+
+#rLogo
+ {
+    filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+    animation: fadeIn 0.5s infinite linear;
+}
+
+
+@keyframes fadeIn {
+    0% {
+    filter: invert(0%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+
+    }
+    50%{
+        filter: invert(45%) sepia(60%) saturate(2878%) hue-rotate(36deg) brightness(104%) contrast(97%);
+  
+    }
+    100% {
+    filter: invert(90%) sepia(60%) saturate(2878%) hue-rotate(36deg) brightness(104%) contrast(97%);
+
+    }
+}
+
+div>a>#rLogo{
+    width: 10px!important;
+    height: 10px;
+}
