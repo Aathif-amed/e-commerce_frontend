@@ -1,36 +1,93 @@
 import React from "react";
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Button, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
-import "./navigation.css";
+import { logout } from "../../slices/userSlice";
+import { BiLogOut } from "react-icons/bi";
+import {
+  MdDashboard,
+  MdOutlineCreate,
+  MdReorder,
+  MdShoppingCart,
+} from "react-icons/md";
 function Navigation() {
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  //logout function
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <LinkContainer to="/">
-          <Navbar.Brand>Refurbished.Store</Navbar.Brand>
-        </LinkContainer>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Link to="/login" className="navLoginLink">
-              Login
-            </Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <>
+      <Navbar bg="light" expand="lg" fixed="top">
+        <Container>
+          <LinkContainer to="/">
+            <Navbar.Brand>Refurbished.Store</Navbar.Brand>
+          </LinkContainer>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ms-auto">
+              {!user && (
+                <LinkContainer
+                  to="/login"
+                  className="btn btn-primary text-white"
+                  style={{ letterSpacing: "1px" }}
+                >
+                  <Nav.Link>LOGIN</Nav.Link>
+                </LinkContainer>
+              )}
+              {user && (
+                <NavDropdown title={`${user.email}`} id="basic-nav-dropdown">
+                  {user.isAdmin && (
+                    <>
+                      <LinkContainer to="/dashboard">
+                        <NavDropdown.Item>
+                          <MdDashboard style={{ marginBottom: "2px" }} />{" "}
+                          Dashboard
+                        </NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/createProduct">
+                        <NavDropdown.Item>
+                          <MdOutlineCreate style={{ marginBottom: "2px" }} />{" "}
+                          Create Product
+                        </NavDropdown.Item>
+                      </LinkContainer>
+                    </>
+                  )}
+                  {!user.isAdmin && (
+                    <>
+                      <LinkContainer
+                        to="/cart"
+                        style={{ letterSpacing: "1px" }}
+                      >
+                        <NavDropdown.Item>
+                          <MdShoppingCart style={{ marginBottom: "2px" }} />{" "}
+                          Cart
+                        </NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/orders">
+                        <NavDropdown.Item>
+                          <MdReorder style={{ marginBottom: "2px" }} /> My
+                          Orders
+                        </NavDropdown.Item>
+                      </LinkContainer>
+                    </>
+                  )}
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item className="text-center">
+                    <Button variant="danger" onClick={handleLogout}>
+                      <BiLogOut style={{ marginBottom: "2px" }} /> Logout
+                    </Button>
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <Container style={{ height: "4rem" }} />
+    </>
   );
 }
 

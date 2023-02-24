@@ -5,7 +5,9 @@ const initialState = null;
 export const userSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: () => initialState,
+  },
   extraReducers: (builder) => {
     builder.addMatcher(
       apiCalls.endpoints.register.matchFulfilled,
@@ -21,5 +23,7 @@ export const userSlice = createSlice({
     );
   },
 });
+
+export const { logout } = userSlice.actions;
 
 export default userSlice.reducer;

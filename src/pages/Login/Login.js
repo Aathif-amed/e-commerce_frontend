@@ -1,14 +1,25 @@
 import React, { useState } from "react";
-import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
+import {
+  Alert,
+  Button,
+  Col,
+  Container,
+  Form,
+  Image,
+  Row,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import signIn_Image from "../../assets/signIn.png";
+import { useLoginMutation } from "../../utils/apiCalls";
 import "./login.css";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [login, { error, isLoading, isError }] = useLoginMutation();
 
-  const handleSubmit = () => {
-    alert("form");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login({ email, password });
   };
   return (
     <Container className="login_container">
@@ -19,7 +30,7 @@ function Login() {
         <Col md={6} className="login_form-container">
           <Form className="login_form" onSubmit={handleSubmit}>
             <h1 className="mt-3 mb-4 text-center">LOGIN</h1>
-
+            {isError && <Alert variant="danger">{error.data}</Alert>}
             <Form.Group>
               <Form.Label>Email</Form.Label>
               <Form.Control
@@ -48,9 +59,15 @@ function Login() {
             </Form.Group>
 
             <Form.Group className="text-center mb-3">
-              <Button type="submit" variant="secondary">
-                Login
-              </Button>
+              {isLoading ? (
+                <div className="spinner-border text-secondary" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                <Button type="submit" variant="secondary" disabled={isLoading}>
+                  Submit
+                </Button>
+              )}
             </Form.Group>
             <p className="text-center">
               Don't have an account?{" "}
