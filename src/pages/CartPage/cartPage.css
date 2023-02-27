@@ -1,0 +1,30 @@
+.table-responsive-sm {
+  max-height: 70vh;
+  overflow: scroll;
+}
+.plus-circle,
+.minus-circle {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.plus-circle {
+  margin-left: 5px;
+}
+
+.minus-circle {
+  margin-right: 5px;
+}
+.emptyCart {
+  text-align: center;
+  font-size: larger;
+}
+.cart-table {
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.75);
+  border-radius: 0.5rem;
+  width: 90%;
+  margin: 0 auto 1rem auto;
+}
+.totalText {
+  width: 90%;
+}

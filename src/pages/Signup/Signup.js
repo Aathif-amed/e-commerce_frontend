@@ -17,14 +17,10 @@ function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+
   const [register, { error, isLoading, isError }] = useRegisterMutation();
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      error.data = "password and confirm password must be same";
-      return isError;
-    }
     register({ name, email, password });
   };
   return (
@@ -37,6 +33,7 @@ function Signup() {
           <Form className="signup_form" onSubmit={handleSubmit}>
             <h1 className="mt-3 mb-4 text-center">Sign Up</h1>
             {isError && <Alert variant="danger">{error.data}</Alert>}
+
             <Form.Group>
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -76,19 +73,7 @@ function Signup() {
                 required
               />
             </Form.Group>
-            <Form.Group>
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                className="mb-3"
-                type="password"
-                placeholder="Password"
-                value={confirmPassword}
-                onChange={(e) => {
-                  setConfirmPassword(e.target.value);
-                }}
-                required
-              />
-            </Form.Group>
+
             <Form.Group className="text-center mb-3">
               {isLoading ? (
                 <div className="spinner-border text-secondary" role="status">
