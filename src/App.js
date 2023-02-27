@@ -22,7 +22,7 @@ function App() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
-    const socket = io("https://refurbished-store.onrender.com");
+    const socket = io("wss://refurbished-store.onrender.com");
     socket.off("notification").on("notification", (msgObj, user_id) => {
       if (user_id === user._id) {
         dispatch(addNotification(msgObj));
