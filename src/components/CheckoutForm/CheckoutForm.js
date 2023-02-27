@@ -33,7 +33,6 @@ function CheckoutForm() {
           },
         }
       );
-      console.log(paymentData.data.client_secret);
       const { paymentIntent } = await stripe.confirmCardPayment(
         paymentData.data.client_secret,
         {

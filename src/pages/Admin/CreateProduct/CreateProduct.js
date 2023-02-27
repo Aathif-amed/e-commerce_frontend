@@ -11,8 +11,6 @@ import { MdCreate } from "react-icons/md";
 
 function CreateProduct() {
   const user = useSelector((state) => state.user);
-  console.log(user);
-
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");

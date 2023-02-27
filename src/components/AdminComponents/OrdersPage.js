@@ -47,7 +47,6 @@ function OrdersPage() {
       delete productCopy.description;
       return productCopy;
     });
-    console.log(productsToShow);
     setShow(true);
     setOrderToShow(productsToShow);
   }

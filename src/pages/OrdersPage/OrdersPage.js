@@ -32,7 +32,6 @@ function OrdersPage() {
             Authorization: "Bearer " + userToken,
           },
         });
-        console.log(userOrder);
         setLoading(false);
         setOrders(userOrder.data);
       } catch (error) {
@@ -49,9 +48,7 @@ function OrdersPage() {
 
   function showOrder(productsObj) {
     let productsToShow = products.filter((product) => productsObj[product._id]);
-    console.log(productsToShow);
     productsToShow = productsToShow.map((product) => {
-      console.log(product);
       const productCopy = { ...product };
       productCopy.count = productsObj[product._id];
       delete productCopy.description;

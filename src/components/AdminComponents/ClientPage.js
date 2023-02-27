@@ -21,12 +21,12 @@ function ClientPage() {
       })
       .then(({ data }) => {
         setLoading(false);
-        console.log(data);
+
         setUsers(data);
       })
-      .catch((e) => {
+      .catch((error) => {
         setLoading(false);
-        console.log(e);
+        console.log(error);
       });
   }, []);
 
