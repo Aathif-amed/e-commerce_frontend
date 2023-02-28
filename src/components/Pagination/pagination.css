@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .paginationItem {
@@ -24,17 +25,18 @@
   transform: translate(-50%, -50%);
 }
 .paginationItem.active {
-  background-color: #999;
+  background-color: #fff;
 }
 
 .prev,
 .next {
+  border-radius: 1rem;
   background: #fff;
   border: none;
   padding: 10px;
   color: blue;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
-  margin: 0 10px;
+  margin: 0 10px 5px;
   cursor: pointer;
 }
 
