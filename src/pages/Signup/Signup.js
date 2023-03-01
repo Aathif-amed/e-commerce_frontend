@@ -9,7 +9,6 @@ import {
   Row,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import signIn_Image from "../../assets/signIn.png";
 import { useRegisterMutation } from "../../utils/apiCalls";
 import "./signup.css";
 
@@ -26,8 +25,11 @@ function Signup() {
   return (
     <Container className="signup_container">
       <Row>
-        <Col md={6} className="signup_image-container ">
-          <Image src={signIn_Image} className="signup_image"></Image>
+        <Col md={6} className="signup_image-container">
+          <Image
+            src="https://res.cloudinary.com/amedstack/image/upload/v1677216638/ecomm/design_m7ggbr.jpg"
+            className="signup_image"
+          ></Image>
         </Col>
         <Col md={6} className="signup_form-container">
           <Form className="signup_form" onSubmit={handleSubmit}>

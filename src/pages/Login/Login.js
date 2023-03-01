@@ -9,7 +9,6 @@ import {
   Row,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import signIn_Image from "../../assets/signIn.png";
 import { useLoginMutation } from "../../utils/apiCalls";
 import "./login.css";
 function Login() {
@@ -25,7 +24,10 @@ function Login() {
     <Container className="login_container">
       <Row>
         <Col md={6} className="login_image-container ">
-          <Image src={signIn_Image} className="login_image"></Image>
+          <Image
+            src="https://res.cloudinary.com/amedstack/image/upload/v1677665883/ecomm/signIn_fud6gj.png"
+            className="login_image"
+          ></Image>
         </Col>
         <Col md={6} className="login_form-container">
           <Form className="login_form" onSubmit={handleSubmit}>

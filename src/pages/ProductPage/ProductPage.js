@@ -60,7 +60,7 @@ function ProductPage() {
     <>
       <Container className="pt-4" style={{ position: "relative" }}>
         <Row className="pt-4 productPage_container">
-          <Col lg={6}>
+          <Col lg={6} className="pb-0">
             <AliceCarousel
               mouseTracking
               items={images}
@@ -68,7 +68,7 @@ function ProductPage() {
             />
           </Col>
           <Col lg={6} className="pt-4">
-            <h1 className="mb-5">{product.name}</h1>
+            <h1 className="mb-3">{product.name}</h1>
             <p>
               <b>Category: </b>
               <Badge bg="primary">{product.category}</Badge>
@@ -76,36 +76,38 @@ function ProductPage() {
             <p className="product__price">
               <b>Price: </b>₹{product.price}
             </p>
-            <p style={{ textAlign: "justify" }} className="pb-3">
+            <p className="mb-4 product_description">
               <strong>Description:</strong> {product.description}
             </p>
-            {user && !user.isAdmin && (
-              <Button
-                size="lg"
-                variant="dark"
-                className="mb-3"
-                onClick={() =>
-                  addToCart({
-                    cartInfo: {
-                      userId: user._id,
-                      productId: id,
-                      price: product.price,
-                      image: product.pictures[0].url,
-                    },
-                    userToken: user.token,
-                  })
-                }
-              >
-                <MdOutlineAddShoppingCart /> Add to cart
-              </Button>
-            )}
-            {user && user.isAdmin && (
-              <LinkContainer to={`/product/${product._id}/edit`}>
-                <Button size="lg" variant="info" className="mb-3">
-                  <MdEdit /> Edit Product
+            <p className="text-center">
+              {user && !user.isAdmin && (
+                <Button
+                  size="lg"
+                  variant="dark"
+                  className="mb-3"
+                  onClick={() =>
+                    addToCart({
+                      cartInfo: {
+                        userId: user._id,
+                        productId: id,
+                        price: product.price,
+                        image: product.pictures[0].url,
+                      },
+                      userToken: user.token,
+                    })
+                  }
+                >
+                  <MdOutlineAddShoppingCart /> Add to cart
                 </Button>
-              </LinkContainer>
-            )}
+              )}
+              {user && user.isAdmin && (
+                <LinkContainer to={`/product/${product._id}/edit`}>
+                  <Button size="lg" variant="info" className="mb-1 text-center">
+                    <MdEdit /> Edit Product
+                  </Button>
+                </LinkContainer>
+              )}
+            </p>
           </Col>
         </Row>
         <div className="my-4">

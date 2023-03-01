@@ -3,7 +3,7 @@ import { Badge, Card } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import "./similarProduct.css";
 
-function SimilarProduct({ _id, name, category, pictures }) {
+function SimilarProduct({ _id, name, category, pictures, price }) {
   return (
     <LinkContainer
       to={`/product/${_id}`}
@@ -17,10 +17,13 @@ function SimilarProduct({ _id, name, category, pictures }) {
           variant="top"
           className="product-preview-img"
           src={pictures[0].url}
-          style={{ height: "150px", objectFit: "cover" }}
+          style={{ height: "150px", objectFit: "contain" }}
         />
-        <Card.Body>
+        <Card.Body className="text-center">
           <Card.Title>{name}</Card.Title>
+          <Card.Text>
+            <b>Price: </b>₹{price}.
+          </Card.Text>
           <Badge bg="warning" text="dark">
             {category}
           </Badge>

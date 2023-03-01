@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Alert, Col, Container, Form, Row, Button } from "react-bootstrap";
-import { IoCreate } from "react-icons/io5";
 import { FaCloudUploadAlt, FaTimesCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useCreateProductMutation } from "../../../utils/apiCalls";
 import api from "../../../utils/api";
-import "./createProduct.css";
+import "./product.css";
 import { MdCreate } from "react-icons/md";
 
 function CreateProduct() {
@@ -60,12 +59,16 @@ function CreateProduct() {
         cloudName: process.env.REACT_APP_CLOUD_NAME,
         uploadPreset: process.env.REACT_APP_CLOUD_PRESET,
         sources: ["local", "url", "unsplash"],
+        folder: "products",
+        autoMinimize: true,
       },
       (error, result) => {
+        console.log(result);
+
         if (!error && result.event === "success") {
           setImages((prev) => [
             ...prev,
-            { url: result.info.url, public_id: result.info.public_id },
+            { url: result.info.secure_url, public_id: result.info.public_id },
           ]);
         }
       }
@@ -76,15 +79,14 @@ function CreateProduct() {
   return (
     <Container className="createProduct_container">
       <Row>
+        <Col md={6} className="new-product__image--container" />
+
         <Col md={6} className="new-product__form--container">
-          <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
-            <h1 className="mt-4 text-center">
-              <IoCreate style={{ marginBottom: "10px" }} />
-              Create Product
-            </h1>
-            {isSuccess && (
-              <Alert variant="success">Product created with succcess</Alert>
-            )}
+          <Form style={{ width: "90%" }} onSubmit={handleSubmit}>
+            <h4 className="mt-4 text-center">
+              <MdCreate style={{ marginBottom: "5px" }} /> Create Product
+            </h4>
+            {isSuccess && <Alert variant="success">Product Created .!</Alert>}
             {isError && <Alert variant="danger">{error.data}</Alert>}
             <Form.Group className="mb-3">
               <Form.Label>Product name</Form.Label>
@@ -122,11 +124,10 @@ function CreateProduct() {
 
             <Form.Group
               className="mb-3"
-              value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
               <Form.Label>Category</Form.Label>
-              <Form.Select>
+              <Form.Select value={category}>
                 <option disabled selected>
                   -- Select One --
                 </option>
@@ -166,13 +167,11 @@ function CreateProduct() {
                 variant="primary"
                 disabled={isLoading || isSuccess || images.length === 0}
               >
-                <MdCreate size={20} style={{ marginBottom: "6px" }} /> Create
-                Product
+                <MdCreate size={20} style={{ marginBottom: "6px" }} /> Submit
               </Button>
             </Form.Group>
           </Form>
         </Col>
-        <Col md={6} className="new-product__image--container"></Col>
       </Row>
     </Container>
   );
