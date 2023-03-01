@@ -14,7 +14,7 @@ function ProductPreview({ _id, category, name, pictures, price }) {
           variant="top"
           className="product-preview-img"
           src={pictures[0].url}
-          style={{ height: "150px", objectFit: "cover" }}
+          style={{ height: "150px", objectFit: "contain" }}
         />
         <Card.Body className="text-center">
           <Card.Title className="text-capitalize">{name}</Card.Title>
