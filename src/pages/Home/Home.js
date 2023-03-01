@@ -12,7 +12,7 @@ import ProductPreview from "../../components/ProductPreview/ProductPreview";
 function Home() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
-  const latestProducts = products.slice(0, 8);
+  const latestProducts = products.slice(0, 12);
   useEffect(() => {
     api
       .get("/product")
