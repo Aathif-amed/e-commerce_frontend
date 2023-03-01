@@ -137,8 +137,8 @@ function OrdersPage() {
                 <Pagination
                   data={orders}
                   RenderComponent={TableRow}
-                  pageLimit={1}
-                  dataLimit={10}
+                  pageLimit={2}
+                  dataLimit={5}
                   tablePagination={true}
                 />
               </tbody>

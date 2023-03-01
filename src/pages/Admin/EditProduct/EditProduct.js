@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Col, Container, Form, Row, Button } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useUpdateProductMutation } from "../../../utils/apiCalls";
 import api from "../../../utils/api";
 import "../CreateProduct/product.css";
-import { FaCloudUploadAlt, FaSave, FaTimesCircle } from "react-icons/fa";
+import {
+  FaCloudUploadAlt,
+  FaSave,
+  FaTimes,
+  FaTimesCircle,
+} from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { MdCreate } from "react-icons/md";
 
@@ -64,7 +69,7 @@ function EditProduct() {
     }).then(({ data }) => {
       if (data.length > 0) {
         setTimeout(() => {
-          navigate("/");
+          navigate("/dashboard");
         }, 1500);
       }
     });
@@ -171,11 +176,10 @@ function EditProduct() {
               ))}
             </div>
             <Form.Group className="d-flex justify-content-center gap-2 mb-4">
-              <Button
-                type="button"
-                variant="outline-secondary"
-                onClick={showWidget}
-              >
+              <Link to={`/dashboard`} className="btn btn-outline-danger">
+                <FaTimes size={25} style={{ marginBottom: "4px" }} /> Cancel
+              </Link>
+              <Button type="button" variant="outline-dark" onClick={showWidget}>
                 <FaCloudUploadAlt size={20} style={{ marginBottom: "6px" }} />{" "}
                 Upload Images
               </Button>

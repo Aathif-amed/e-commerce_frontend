@@ -110,17 +110,20 @@ function ProductPage() {
             </p>
           </Col>
         </Row>
-        <div className="my-4">
-          <h2 className="text-center">Similar Products</h2>
-          <div className="d-flex justify-content-center align-items-center flex-wrap">
-            <AliceCarousel
-              mouseTracking
-              items={similarProducts}
-              responsive={responsive}
-              controlsStrategy="alternate"
-            />
-          </div>
-        </div>
+        <Row className="my-4">
+          <Col>
+            <h2 className="text-center">Similar Products</h2>
+
+            <div className="d-flex justify-content-center align-items-center flex-wrap">
+              <AliceCarousel
+                mouseTracking
+                items={similarProducts}
+                responsive={responsive}
+                controlsStrategy="alternate"
+              />
+            </div>
+          </Col>
+        </Row>
       </Container>
       {isSuccess && (
         <ToastMessage

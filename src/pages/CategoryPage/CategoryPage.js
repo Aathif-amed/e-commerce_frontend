@@ -81,8 +81,8 @@ function CategoryPage() {
               <Pagination
                 data={productsSearch}
                 RenderComponent={ProductSearch}
-                pageLimit={1}
-                dataLimit={5}
+                pageLimit={3}
+                dataLimit={4}
                 tablePagination={false}
               />
             </Col>

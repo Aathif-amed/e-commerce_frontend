@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Alert, Col, Container, Form, Row, Button } from "react-bootstrap";
-import { FaCloudUploadAlt, FaTimesCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { FaCloudUploadAlt, FaTimes, FaTimesCircle } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useCreateProductMutation } from "../../../utils/apiCalls";
 import api from "../../../utils/api";
@@ -153,11 +153,10 @@ function CreateProduct() {
               ))}
             </div>
             <Form.Group className="d-flex justify-content-center gap-2 mb-4">
-              <Button
-                type="button"
-                variant="outline-secondary"
-                onClick={showWidget}
-              >
+              <Link to={`/`} className="btn btn-outline-danger">
+                <FaTimes size={25} style={{ marginBottom: "4px" }} /> Cancel
+              </Link>
+              <Button type="button" variant="outline-dark" onClick={showWidget}>
                 <FaCloudUploadAlt size={20} style={{ marginBottom: "6px" }} />{" "}
                 Upload Images
               </Button>

@@ -1,9 +1,8 @@
 import React from "react";
-import { Table, Button, Container, Row, Col, NavItem } from "react-bootstrap";
-import { FaLaptop, FaPlusCircle } from "react-icons/fa";
+import { Table, Button, Container, Row, Col } from "react-bootstrap";
+import { FaEye, FaLaptop } from "react-icons/fa";
 import { MdCreate, MdDeleteForever } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { useDeleteProductMutation } from "../../utils/apiCalls";
 import Pagination from "../Pagination/Pagination";
@@ -13,7 +12,7 @@ function Products() {
   const products = useSelector((state) => state.products);
   const user = useSelector((state) => state.user);
   // removing the product
-  const [deleteProduct, { isLoading, isSuccess }] = useDeleteProductMutation();
+  const [deleteProduct, { isLoading }] = useDeleteProductMutation();
   function handleDeleteProduct(id) {
     // logic here
     if (window.confirm("Are you sure?"))
@@ -39,6 +38,9 @@ function Products() {
         <td>{price}</td>
         <td>
           <div className="d-flex gap-2 justify-content-center">
+            <Link to={`/product/${_id}`} className="btn btn-outline-primary">
+              <FaEye size={25} style={{ marginBottom: "4px" }} />
+            </Link>
             <Link to={`/product/${_id}/edit`} className="btn btn-outline-dark">
               <MdCreate size={25} style={{ marginBottom: "4px" }} />
             </Link>
@@ -79,12 +81,12 @@ function Products() {
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="pBody">
               <Pagination
                 data={products}
                 RenderComponent={TableRow}
-                pageLimit={1}
-                dataLimit={5}
+                pageLimit={3}
+                dataLimit={3}
                 tablePagination={true}
               />
             </tbody>
